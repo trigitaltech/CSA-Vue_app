@@ -275,7 +275,6 @@
           </v-card-subtitle>
           <hr class="ml-2 mr-2" />
           <v-card-text>
-            <h6>ssssssssssss</h6>
             <!-- ssssssssssssss -->
             <v-expansion-panels>
               <v-expansion-panel>
@@ -290,7 +289,7 @@
                       <b>₹ {{item.price}}</b>
                     </v-col>
                     <v-col>
-                      <v-btn color="error" small @click="removeCart(item, 'broadCast')"> X </v-btn>
+                      <v-btn color="error" small @click="removeCart(item, 'inDigital')"> X </v-btn>
                     </v-col>
                   </v-row>
                 </v-expansion-panel-content>
@@ -387,7 +386,8 @@ export default {
           price: 20
         }
       ],
-        itemsPerPage: 20,
+      itemsPerPage: 20,
+      broadcasterpacks: [],
       itemsPerPageOptions: [20, 40, 60, 80, 100],
       text: "",
       cInfo: this.$route.params.cInfo,
@@ -538,7 +538,6 @@ export default {
       const result = await getPacks(payload);
       const  data  = result.message;
       this.broadcasterpacks = data;
-      console.log(this.broadcasterpacks)
     },
     async getChannelItem() {
       var userData = JSON.parse(localStorage.getItem("in:user"))        
@@ -580,7 +579,6 @@ export default {
       }
     },
     addCart(payload, addingType){
-      console.log('adding....', payload)
       payload.isCart = true;
       if (addingType == 'alaCard') {
         this.userSelection.alaCard.push(payload)
@@ -596,11 +594,9 @@ export default {
         let ala = this.userSelection.alaCard.filter(x => x.id != payload.id)
         this.userSelection.alaCard = ala
       } else if (removingType == 'broadCast') {
-        // not working for delete from side bar TODO
         let brd = this.userSelection.broadCast.filter(x => x.id != payload.id)
         this.userSelection.broadCast = brd;
       } else if (removingType == 'inDigital') {
-        // not working for delete from side bar TODO
         let inDigi = this.userSelection.inDigital.filter(x => x.id != payload.id)
         this.userSelection.inDigital = inDigi
       }
