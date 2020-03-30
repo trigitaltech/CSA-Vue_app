@@ -40,7 +40,12 @@
             :sort-by="sortBy" :sort-desc="sortDesc" >
             <v-card flat >
               <v-card-text>
-                <v-row >
+                <v-row>
+                  <div v-if="indigitalpacks.length == 0">
+                    <v-text-field color="success" loading disabled></v-text-field>
+                  </div>
+                </v-row>
+                <v-row v-if="indigitalpacks.length > 0">
                   <v-col md="4" v-for="(item,idx) in indigitalpacks" :key="idx">
                     <v-card>
                       <v-card-title>
@@ -53,7 +58,7 @@
                           &#x20b9; {{ item.price }}
                         </v-col>
                       </v-row>
-          <!-- 11111111111111111111111111111 -->
+                      <!-- 11111111111111111111111111111 -->
                       <v-card-actions>
                         <v-row align="center" justify="center" class="mb-2">
                           <v-btn color="primary" small @click="addCart(item, 'inDigital');" v-if="!item.isCart">
