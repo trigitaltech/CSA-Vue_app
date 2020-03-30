@@ -2,7 +2,8 @@
   <v-container class="fill-height" fluid>
     <v-row align="center" justify="center">
       <v-col class="ml-12">
-           <v-form ref="form" v-model="valid" lazy-validation>
+        <!-- <v-form ref="form" v-model="valid" lazy-validation> -->
+        <v-form ref="form" lazy-validation>
         <v-card class="loginmain elevation-4">
             <v-card-title class="mb-5 justify-center" style="color:white"><h2>Customer Verification</h2>
             </v-card-title>
@@ -13,7 +14,7 @@
               v-model="form.stb"
               
               label="Enter STB Serial Number / Customer ID"
-              :placeholder="customer"
+              :placeholder="'customer'"
               required
             ></v-text-field>          
               <v-text-field
@@ -21,7 +22,7 @@
               class="ml-5 mr-5"
               v-model="form.Number"
               label="Enter Mobile Number"
-              :placeholder="customer"
+              :placeholder="'customer'"
               required
             ></v-text-field>          
         </v-card>
@@ -147,15 +148,13 @@ export default {
         let resActivePlans = result.response["active-plans"]; //.map(plan => plan.totalPlanPrice)
         var user = {
           channelIds: channerIDS,
-          // price:result2,
           price: bkt_prices,
           region: result.response.region,
-          quality: "SD",
+          quality: result.response.QUALITY,
           customerType: "DP",
           isLogin: false,
           totalPrice: totalPrice
         };
-        console.log(user);
         localStorage.setItem("in:user", JSON.stringify(user));
         payload[form] = true;
         this.$router.push({
