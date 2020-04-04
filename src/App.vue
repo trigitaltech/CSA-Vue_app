@@ -10,6 +10,7 @@
 
 <script>
 import navBar from "@/components/navBar.vue";
+import './assets/styles/style.css';
 export default {
   name: "Home",
   data() {

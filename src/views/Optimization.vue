@@ -412,8 +412,7 @@ export default {
         var userData = JSON.parse(localStorage.getItem("in:user"))        
         const payload = {
           channelIds: channels_id,
-          // channelIds: [1,2,3,4,7,9,15,13,71,311,328,31,44,264,460,197,198,229,27,154,175,265],
-          quality: "SD",
+          quality: userData.quality,
           region: userData.region,
         };
         const result = await getOptimizeAlgoritm(payload);
