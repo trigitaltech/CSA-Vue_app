@@ -1,3 +1,5 @@
 h3{
 	color: yellow;
 }
+.v-input__slot{background: #fff;}
+.theme--light.v-label{ color: #fff; text-indent: 5px; }
