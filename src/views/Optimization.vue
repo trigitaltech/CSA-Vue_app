@@ -139,7 +139,7 @@
         </v-card>
       </v-col>
       <v-col sm="12" md="6" lg="6">
-        <v-card>
+        <v-card v-if="isResult">
           <v-toolbar color="primary" dark flat>
             <v-toolbar-title>Optimised Solution</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -168,7 +168,7 @@
             <v-tab-item>
               <v-card flat>
                 <v-card-text>
-                  <v-simple-table>
+                  <v-simple-table v-if="optimizeResultCost.length > 0">
                     <template v-slot:default>
                       <thead>
                         <tr>
@@ -276,6 +276,18 @@
             </v-tab-item>
           </v-tabs-items>
         </v-card>
+
+        <v-card v-else>
+          <v-toolbar color="primary" dark flat>
+            <v-toolbar-title>Optimized Solution</v-toolbar-title>
+            <v-spacer></v-spacer>
+          </v-toolbar>
+        </v-card>
+        <v-card-text>
+          <v-overlay :value="overlay">
+            <v-progress-circular indeterminate size="64"></v-progress-circular>
+          </v-overlay>
+        </v-card-text>
       </v-col>
     </v-row>
     <v-snackbar v-model="snackbar" :bottom="true" :timeout="2000" :color="color">
@@ -295,6 +307,8 @@ export default {
   name: "UserBlogs",
   data() {
     return {
+      isResult: false,
+      overlay: true,
       localStoredSelectedBouquets: [],
       singleBucktChannelsForExcel: [],
       // json_fields: {'Name': 'name','Broadcaster': 'broadcaster.name','Genre':'genre.name', 'Language':'language.name','Quality':'quality' },
@@ -468,9 +482,12 @@ export default {
           this.optimizeResultCost[5].price +
           +this.optimizeResultCost[4].price;
 
+        this.isResult = true;
+        this.overlay = false;
         console.log("cost::", this.optimizeResultCost);
+      } else {
+        this.overlay = false;
       }
-      this.isResult = true;
     },
     removeCart(payload) {
       payload.isCart = false;
@@ -487,12 +504,15 @@ export default {
       this.json_data = this.$store.getters["channel/getCartList"];
     }
   },
+  created() {
+    this.optimizeAlgorithm();
+  },
   mounted() {
     // this.setTable();
     // this.Table();
     let SelectedBoucquets = localStorage.getItem("SelectedBoucquets");
     this.localStoredSelectedBouquets = JSON.parse(SelectedBoucquets);
-    this.optimizeAlgorithm();
+    // this.optimizeAlgorithm();
   },
   computed: {
     getCart() {
