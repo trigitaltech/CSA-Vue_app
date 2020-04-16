@@ -1,189 +1,207 @@
 <template>
-  <div>
-    <v-card class="section1-card mt-4 ml-12 mr-12">
-      <v-row style="color: rgb(73, 184, 237);" class="loginmain1">
-        <v-overlay :value="overlay">
-          <v-progress-circular indeterminate size="64"></v-progress-circular>
-        </v-overlay>
-        <v-col md="6">
-          <h2>
-            <b>Welcome {{name}} !</b>
-          </h2>
-        </v-col>
-        <v-col md="4">
-          <v-card class="loginmain3">
-            <span class="ml-4" style="padding:0px">CHANNELS SELECTED</span>
-            <span class="mr-6 float-right">VIEW CART</span>
-            <br />
-            <span class="ml-4" style="padding:0px">ALACARTE</span>
-            <span class="ml-12">BOUQUETS :</span>
-            <span class="ml-12">TOTAL PRICE</span>
-          </v-card>
-        </v-col>
-        <v-col md="2">
-          <v-btn
-            class="ml-auto d-block main-button"
-            color="primary white--text text--lighten-1"
-          >Optimize</v-btn>
-        </v-col>
-      </v-row>
-    </v-card>
-    <v-row>
-      <v-col>
-        <div>
-          <v-card
-            class="mt-8 ml-12"
-            color="primary white--text text--lighten-1"
-            style="width:610px; margin-left:10px;"
-          >
-            <v-card-title class="loginmain2 justify-center">Current Active Packs</v-card-title>
-            <v-data-table
-              hide-default-header
-              :headers="columns2"
-              :items="verify1"
-              :page.sync="page"
-              :items-per-page="itemsPerPage"
-              hide-default-footer
-              class="my-table elevation-1"
-              @page-count="pageCount = $event"
-            ></v-data-table>
-            <hr />
-            <v-simple-table>
-              <template v-slot:default>
-                <thead>
-                  <tr>
-                    <th class="text-left" style="color:black;">Content Amount</th>
-                    <th class="text-left" style="color:black;">{{ params.totalPrice }} /-</th>
-                  </tr>
-                  <tr>
-                    <th class="text-left" style="color:black;">Total Tax (18% GST)</th>
-                    <th
-                      class="text-left"
-                      style="color:black;"
-                    >{{ ( (params.totalPrice/100) * 18).toFixed(2) }} /-</th>
-                  </tr>
-                  <tr>
-                    <th class="text-left" style="color:black;">Total Bill Amount</th>
-                    <th
-                      class="text-left"
-                      style="color:black;"
-                    >{{ totalWithGST(params.totalPrice, ( ((params.totalPrice/100) * 18).toFixed(2) ) ) }} /-</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <!-- <tr v-for="item in optimizeResultCost"
-                        :key="item.name">
-                          <td>{{ item.desc }}</td>
-                          <td>{{ decimal(item.price) }}</td>
-                  </tr>-->
-                </tbody>
-              </template>
-            </v-simple-table>
-            <!-- <div class="text-center pt-2">
-      <v-pagination v-model="page" :length="pageCount"></v-pagination>
-            </div>-->
-          </v-card>
-        </div>
-      </v-col>
-      <v-col>
-        <h3 class="recommended-Packs mt-8 ml-4 mr-4">
-          Recommended Packs
-          <span
-            class="recommended-Pack-Subtitle"
-          >(Optimised pack based on the user’s Current Active Packs )</span>
-        </h3>
-
-        <v-card class="ml-4 mr-4 mt-8">
-          <v-card-text>
-            <v-simple-table>
-              <template v-slot:default>
-                <div v-if="optimizeResult && optimizeResult.bouquets">
-                  <thead>
-                    <tr>
-                      <th class="text-left">Channel Name</th>
-                      <th class="text-left">Bouquet Name</th>
-                      <th class="text-left">Total Price</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr
-                      v-for="(items,
-                                  channelIndex) in optimizeResult.bouquets"
-                      :key="channelIndex"
-                    >
-                      <td>{{ items.bouquetName }}</td>
-                      <td>{{ items.bouquetDescription }}</td>
-                      <td>{{ items.bouquetPrice }}/Month</td>
-                    </tr>
-                  </tbody>
+  <v-container fluid>
+    <v-row class="mx-md-12">
+      <v-col class="col-md-12 col-lg-12 col-12">
+        <v-card flat>
+          <v-row class="px-2" style="color: rgb(73, 184, 237);">
+            <v-col class="col-md-6 col-lg-6 col-12">
+              <h2>
+                <b>Welcome {{ name }} !</b>
+              </h2>
+            </v-col>
+            <v-col class="col-md-4 col-lg-4 col-12">
+              <div class="header-detail">
+                <div class="d-flex w-100 justify-space-between">
+                <span class="" >
+                 Channels Selected : 334
+                </span>
+                <span class="">
+                  Bouquets : 44
+                </span>
+                <span >
+                  View Cart : 353
+                </span>
                 </div>
-              </template>
-            </v-simple-table>
-            <hr />
-            <v-simple-table>
-              <template v-slot:default>
-                <thead>
-                  <tr
-                    v-for="(items,
-                                channelInde) in  optimizeResult"
-                    :key="channelInde"
-                  ></tr>
-                  <tr>
-                    <th class="text-left" style="color:black;">Content Amount</th>
-                    <th class="text-left" style="color:black;">{{ decimal(totalPrice) }} /-</th>
-                  </tr>
-
-                  <tr>
-                    <th class="text-left" style="color:black;">Total Tax (18% GST)</th>
-                    <th
-                      class="text-left"
-                      style="color:black;"
-                    >{{ ( (totalPrice/100) * 18).toFixed(2) }} /-</th>
-                  </tr>
-                  <tr>
-                    <th class="text-left" style="color:black;">Total Bill Amount</th>
-                    <th
-                      class="text-left"
-                      style="color:black;"
-                    >{{ totalWithGST( decimal(totalPrice), ( ((totalPrice/100) * 18).toFixed(2) ) ) }} /-</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <!-- <tr v-for="item in optimizeResultCost"
-                        :key="item.name">
-                          <td>{{ item.desc }}</td>
-                          <td>{{ decimal(item.price) }}</td>
-                  </tr>-->
-                </tbody>
-              </template>
-            </v-simple-table>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn
-              class="main-button mx-auto d-block"
-              color="primary white--text text--lighten-1"
-              @click="Checkout"
-            >Checkout</v-btn>
-          </v-card-actions>
-          <v-card-actions>
-            <v-btn
-              class="main-button mx-auto d-block"
-              color="primary white--text text--lighten-1"
-              @click="addMoreChannels"
-            >Click Here to Add More Channels</v-btn>
-          </v-card-actions>
+                <div class="d-flex w-100 justify-space-between">
+                <span class="" >
+                  Alacarte : 32
+                </span> 
+                <span class="">
+                  Total Price : 1034
+                </span>
+                </div>
+              </div>
+            </v-col>
+            <v-col class="col-md-2 col-lg-2 col-12 d-flex align-center">
+              <v-btn
+                class="ml-md-auto ml-lg-auto mx-sml-auto d-block main-button"
+                color="primary white--text text--lighten-1"
+                >Optimize
+              </v-btn>
+            </v-col>
+          </v-row>
         </v-card>
       </v-col>
+      <v-col class="col-md-12 col-lg-12 col-12">
+        <v-row>
+          <v-col class="col-md-6 col-lg-6 col-12">
+            <v-card  color="primary white--text text--lighten-1">
+              <v-card-title class="loginmain2 justify-center"
+                >Current Active Packs</v-card-title
+              >
+              <v-data-table
+                hide-default-header
+                :headers="columns2"
+                :items="verify1"
+                :page.sync="page"
+                :items-per-page="itemsPerPage"
+                hide-default-footer
+                class="my-table"
+                @page-count="pageCount = $event"
+              >
+              </v-data-table>
+              <hr />
+              <v-simple-table>
+                <template v-slot:default>
+                  <thead>
+                    <tr>
+                      <th class="text-left" style="color:black;">
+                        Content Amount
+                      </th>
+                      <th class="text-left" style="color:black;">
+                        {{ params.totalPrice }} /-
+                      </th>
+                    </tr>
+                    <tr>
+                      <th class="text-left" style="color:black;">
+                        Total Tax (18% GST)
+                      </th>
+                      <th class="text-left" style="color:black;">
+                        {{ ((params.totalPrice / 100) * 18).toFixed(2) }} /-
+                      </th>
+                    </tr>
+                    <tr>
+                      <th class="text-left" style="color:black;">
+                        Total Bill Amount
+                      </th>
+                      <th class="text-left" style="color:black;">
+                        {{
+                          totalWithGST(
+                            params.totalPrice,
+                            ((params.totalPrice / 100) * 18).toFixed(2)
+                          )
+                        }}
+                        /-
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </template>
+              </v-simple-table>
+            </v-card>
+          </v-col>
+          <v-col class="col-md-6 col-lg-6 col-12">
+            <h2 class="recommended-Packs text-color-080851  ">
+              Recommended Packs
+              <small class="recommended-Pack-Subtitle"
+                >(Optimised pack based on the user’s Current Active Packs )
+              </small>
+            </h2>
+
+            <v-card class=" mt-3">
+              <v-card-text>
+                <v-simple-table>
+                  <template v-slot:default>
+                    <div v-if="optimizeResult && optimizeResult.bouquets">
+                      <thead>
+                        <tr>
+                          <th class="text-left">Channel Name</th>
+                          <th class="text-left">Bouquet Name</th>
+                          <th class="text-left">Total Price</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          v-for="(items,
+                          channelIndex) in optimizeResult.bouquets"
+                          :key="channelIndex"
+                        >
+                          <td>{{ items.bouquetName }}</td>
+                          <td>{{ items.bouquetDescription }}</td>
+                          <td>{{ items.bouquetPrice }}/Month</td>
+                        </tr>
+                      </tbody>
+                    </div>
+                  </template>
+                </v-simple-table>
+                <hr />
+                <v-simple-table>
+                  <template v-slot:default>
+                    <thead>
+                      <tr
+                        v-for="(items, channelInde) in optimizeResult"
+                        :key="channelInde"
+                      ></tr>
+                      <tr>
+                        <th class="text-left" style="color:black;">
+                          Content Amount
+                        </th>
+                        <th class="text-left" style="color:black;">
+                          {{ decimal(totalPrice) }} /-
+                        </th>
+                      </tr>
+
+                      <tr>
+                        <th class="text-left" style="color:black;">
+                          Total Tax (18% GST)
+                        </th>
+                        <th class="text-left" style="color:black;">
+                          {{ ((totalPrice / 100) * 18).toFixed(2) }} /-
+                        </th>
+                      </tr>
+                      <tr>
+                        <th class="text-left" style="color:black;">
+                          Total Bill Amount
+                        </th>
+                        <th class="text-left" style="color:black;">
+                          {{
+                            totalWithGST(
+                              decimal(totalPrice),
+                              ((totalPrice / 100) * 18).toFixed(2)
+                            )
+                          }}
+                          /-
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </template>
+                </v-simple-table>
+              </v-card-text>
+              <div class="d-md-flex d-lg-flex justify-space-between">
+                <v-card-actions>
+                  <v-btn
+                    class="main-button w-sm-100  d-block"
+                    color="primary white--text text--lighten-1"
+                    @click="addMoreChannels"
+                    >Click Here to Add More Channels</v-btn
+                  >
+                </v-card-actions>
+                <v-card-actions>
+                  <v-btn
+                    class="main-button w-sm-100 d-block "
+                    color="primary white--text text--lighten-1"
+                    @click="Checkout"
+                    >Checkout</v-btn
+                  >
+                </v-card-actions>
+              </div>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-col>
     </v-row>
-    <v-row></v-row>
-    <!-- <v-col style="margin-bottom:100px;">
-<v-card color="primary white--text text--lighten-1" style="width:600px;">
-                <v-card-text>
-                 
-                </v-card-text>
-              </v-card>
-    </v-col>-->
-  </div>
+  </v-container>
 </template>
 <script>
 // import _ from "lodash";
@@ -192,7 +210,6 @@ import { getOptimizeAlgoritm } from "../services/channel";
 export default {
   data() {
     return {
-      overlay: true,
       page: 1,
       pageCount: 1,
       itemsPerPage: 5,
@@ -200,7 +217,7 @@ export default {
       totalPrice: 0,
       columns2: [
         { text: "BouquetName", value: "bouquetname" },
-        { text: "price", value: "price" }
+        { text: "price", value: "price" },
       ],
       verify1: this.$route.params.merged,
       params: this.$route.params,
@@ -211,25 +228,25 @@ export default {
         {
           desc: "Content Amount",
           qty: null,
-          price: "₹ 130"
+          price: "₹ 130",
         },
         {
           desc: "Content Amount",
           qty: null,
-          price: "₹ 130"
+          price: "₹ 130",
         },
         {
           desc: "GST(18%)",
           qty: null,
-          price: 0
+          price: 0,
         },
         {
           desc: "Total (Monthly)",
           qty: null,
-          price: 0
-        }
+          price: 0,
+        },
       ],
-      payChannel: []
+      payChannel: [],
     };
   },
   methods: {
@@ -250,11 +267,12 @@ export default {
       return total_channers_price + parseInt(gst_price);
     },
     async optimizeAlgorithm() {
+      this.overlay = true;
       var userData = JSON.parse(localStorage.getItem("in:user"));
       const payload = {
         channelIds: userData.channelIds,
         quality: userData.quality,
-        region: userData.region
+        region: userData.region,
       };
       const result = await getOptimizeAlgoritm(payload);
       console.log(result.message);
@@ -262,7 +280,6 @@ export default {
       this.optimizeResult = data;
       this.totalPrice = data.price;
       console.log(this.totalPrice);
-      this.overlay = false;
       /*eslint no-console: "off"*/
       // var bouquetId = result.response.data.bouquets.bouquetId
       // if (data) {
@@ -282,7 +299,7 @@ export default {
       //   this.optimizeResultCost[6].price = ((this.optimizeResultCost[5].price + this.optimizeResultCost[4].price) * 18) / 100;
       //   this.optimizeResultCost[7].price = this.optimizeResultCost[6].price + this.optimizeResultCost[5].price +  + this.optimizeResultCost[4 ].price;
       // }
-    }
+    },
   },
   // computed: {
   //   getCart() {
@@ -291,12 +308,11 @@ export default {
   async mounted() {
     this.optimizeAlgorithm();
     console.log("3333333333");
-  }
+  },
 };
 </script>
 <style>
 .loginmain1 {
-  /* background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%); */
   background: rgb(73, 184, 237);
   background: linear-gradient(
     73deg,
@@ -306,13 +322,14 @@ export default {
 }
 .loginmain2 {
   padding: 10px !important;
-  background: rgb(73, 184, 237);
-  color: black;
-  background: linear-gradient(
+  color: #fff;
+  font-weight: 600;
+  /* background: linear-gradient(
     73deg,
     rgb(241, 241, 241) 27%,
     rgb(211, 211, 211) 100%
-  );
+  ); */
+  background: linear-gradient( 13deg, rgba(73, 184, 237, 1) 0%, rgba(133, 50, 142, 1) 57%, rgba(147, 58, 148, 1) 93%, rgba(150, 60, 149, 1) 96%, rgba(153, 62, 150, 1) 100% );
 }
 </style>
 
@@ -321,9 +338,19 @@ export default {
   box-shadow: none !important;
 }
 .dataTable {
-  color: blue;
+  color: #080851;
   font-size: 0px !important;
   height: 15px;
   padding: 0px;
+}
+.text-color-080851 {
+  color: #080851;
+}
+.header-detail{
+  padding: 2px 10px;
+  text-transform: capitalize;
+  border: 1px solid #aba9a9;
+  color: #676666;
+  border-radius: 4px;
 }
 </style>

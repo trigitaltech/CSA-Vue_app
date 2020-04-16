@@ -121,10 +121,7 @@
             <v-col
               v-for="(item, i) in props.items"
               :key="i"
-              cols="12"
-              sm="4"
-              md="2"
-              lg="2"
+              class="col-md-3 col-lg-3 co-12"
             >
               <v-card class="mx-auto">
                 <div class="img-fix">
@@ -425,11 +422,12 @@ export default {
   padding: 10px !important;
 }
 .img-con{
-  width: 100%;
+  width: 100% !important;
   margin: 0 auto;
 }
 .img-w-100{
   width: 100%;
+  height: 100px;
 }
 .ctm-pd{
   padding: 16px 8px;

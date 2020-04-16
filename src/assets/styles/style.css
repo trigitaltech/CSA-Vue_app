@@ -1,5 +1,28 @@
-h3{
-	color: yellow;
-}
 .v-input__slot{background: #fff;}
 .theme--light.v-label{ color: #fff; text-indent: 5px; }
+.v-application p{
+	color: #676666;
+}
+.theme--light.v-data-table thead tr th{
+	font-size: 14px;
+}
+.theme--light.v-card{
+	color: #676666 !important;
+}
+.recommended-Pack-Subtitle {
+	color: #676666 !important;
+}
+
+/* responsive @media*/
+@media (max-width:767.90px){
+	.w-sm-100{
+		width: 100%;
+	}
+	.mx-sml-auto{
+		margin-left: auto !important;
+		margin-right: auto !important;
+	}
+	.img-w-100{
+		height: 150px !important;
+	}
+}

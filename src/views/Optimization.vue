@@ -1,6 +1,6 @@
 <template>
-  <div class="eb-container">
-    <v-row>
+  <v-container fluid>
+    <v-row class="mx-md-12">
       <v-col sm="12" md="6" lg="6">
         <v-card>
           <v-toolbar color="primary" dark flat>
@@ -294,7 +294,7 @@
       {{ message }}
       <v-btn dark text @click="snackbar = false">Close</v-btn>
     </v-snackbar>
-  </div>
+  </v-container>
 </template>
 <script>
 import Vue from "vue";
