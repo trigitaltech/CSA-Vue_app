@@ -2,7 +2,7 @@
   <v-app-bar app color="primary white--text text--lighten-1" light>
   <v-toolbar-title class="headline">
       <router-link to="/">
-       <v-img style= "margin-left:30px;" class="imagelogin" max-width="60%" src="img/logo1.png"/>
+       <v-img style= "margin-left:30px;" class="imagelogin" max-width="50%" src="img/logo1.png"/>
        </router-link>
     </v-toolbar-title>
     <v-spacer></v-spacer>

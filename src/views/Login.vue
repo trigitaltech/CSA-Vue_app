@@ -1,73 +1,101 @@
 <template>
   <v-container class="fill-height" fluid>
-    <v-row align="center" justify="center">
-      <v-col class="ml-12">
-
-        <!-- <v-form ref="form" v-model="valid" lazy-validation> -->
-        <v-form ref="form" lazy-validation>
-        <v-card class="loginmain elevation-4">
-            <v-card-title class="mb-5 justify-center" style="color:white"><h2>Customer Verification</h2>
-            </v-card-title>
-            <h3 style="color:white;margin-left:230px;margin-bottom:30px;">For Registered Indigital / Nxtdigital Customers</h3>
-            <v-text-field
-              class="ml-5 mr-5"
-              v-model="form.stb"
-              
-              label="Enter STB Serial Number / Customer ID"
-              
-              required
-            ></v-text-field>          
-              <v-text-field
-            style="background:white"
-              class="ml-5 mr-5"
-              v-model="form.Number"
-              label="Enter Mobile Number"
-              
-              required
-            ></v-text-field>          
-        </v-card>
-        <v-btn
+    <v-row class="mx-md-12">
+      <v-col class="col-md-6 col-lg-6 col-12">
+        <v-row>
+          <v-col class="col-md-8 mx-auto">
+            <!-- <v-form ref="form" v-model="valid" lazy-validation> -->
+            <v-form ref="form" lazy-validation>
+              <v-card class="loginmain elevation-4">
+                <v-card-title class=" justify-center" style="color:white"
+                  ><h2>Customer Verification</h2>
+                </v-card-title>
+                <h3 style="color:white" class="mb-4 d-flex justify-center">
+                  For Registered Indigital / Nxtdigital Customers
+                </h3>
+                <div class="mt-4">
+                  <v-text-field
+                    class="mx-4"
+                    v-model="form.stb"
+                    placeholder="Enter STB Serial Number / Customer ID"
+                    label="Enter STB Serial Number / Customer ID"
+                    solo
+                    required
+                  ></v-text-field>
+                  <v-text-field
+                    class="mx-4"
+                    v-model="form.Number"
+                    label="Enter Mobile Number"
+                    placeholder="Enter Mobile Number"
+                    solo
+                    required
+                  ></v-text-field>
+                </div>
+              </v-card>
+              <v-btn
                 class="main-button mt-8 mx-auto d-block"
                 color="primary white--text text--lighten-1"
                 @click="handleSubmit"
-              >Enter</v-btn>
-              </v-form>
+                >Enter</v-btn
+              >
+            </v-form>
+          </v-col>
+        </v-row>
       </v-col>
-      <v-col style="font-size:16px;" class="mr-12">
-        <div>
+      <v-col style="font-size:16px;" class="col-md-6 col-lg-6 col-12">
+        <div class="mt-3 login-des">
           <ul>
             <li>
               <p>
-                Hi Subscribers…This Application will help you optimize the selection of your choice of channels and also inform you about the MRP (Maximum Retail Price) of your selection.
-                You can select or deselect channels as per your wish.
+                Hi Subscribers…This Application will help you optimize the
+                selection of your choice of channels and also inform you about
+                the MRP (Maximum Retail Price) of your selection. You can select
+                or deselect channels as per your wish.
               </p>
             </li>
-            <br>
+            <br />
             <li>
-              <p>This is similar to a shopping cart in your online shopping experience.</p>
-            </li><br>
+              <p>
+                This is similar to a shopping cart in your online shopping
+                experience.
+              </p>
+            </li>
+            <br />
             <li>
-              <p>After selecting all channels of your choice (pay channels, Bouquets of pay channels), view your selected channels by pressing tab “view your selection”.</p>
-            </li><br>
+              <p>
+                After selecting all channels of your choice (pay channels,
+                Bouquets of pay channels), view your selected channels by
+                pressing tab “view your selection”.
+              </p>
+            </li>
+            <br />
           </ul>
         </div>
       </v-col>
-    </v-row>
-    <div style="margin-left:40px;">
-    <h1>For Non Registered Indigital / Nxtdigital Customers --- <a href="#/Guest">Clickhere</a></h1>
-    </div>
-   <v-row style="margin-left:1000px;">
+
+      <div>
+        <h2 class="mx-3">
+          For Non Registered Indigital / Nxtdigital Customers ---
+          <a href="#/Guest">Clickhere</a>
+        </h2>
+      </div>
+      <v-col
+        class="d-flex mt-5 col-md-12 justify-md-end justify-lg-end justify-center col-lg-12 col-12"
+      >
         <v-btn
-                class="main-button mt-8 mx-auto d-block"
-                color="primary white--text text--lighten-1"
-                @click="handleSubmit"
-              >Quickpay</v-btn>
-               <v-btn
-                class="main-button mt-8 mx-auto d-block"
-                color="primary white--text text--lighten-1"
-                @click="handleSubmit"
-              >CustomerSupport</v-btn>
-   </v-row>
+          class="main-button  mr-5"
+          color="primary white--text text--lighten-1"
+          @click="handleSubmit"
+          >Quickpay</v-btn
+        >
+        <v-btn
+          class="main-button "
+          color="primary white--text text--lighten-1"
+          @click="handleSubmit"
+          >CustomerSupport</v-btn
+        >
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 <script>
@@ -78,26 +106,26 @@ export default {
   data() {
     return {
       form: {
-        stb: ""
-      }
+        stb: "",
+      },
     };
   },
-   props: {
+  props: {
     value: [String, Number],
     trim: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   valid: true,
   methods: {
     onInput(event) {
       const value = event.target.value;
-      this.$emit('input', this.trim ? value.trim() : value);
+      this.$emit("input", this.trim ? value.trim() : value);
     },
     onChange(event) {
       const value = event.target.value;
-      this.$emit('change', this.trim ? value.trim() : value);
+      this.$emit("change", this.trim ? value.trim() : value);
     },
     validate() {
       if (this.$refs.form.validate()) {
@@ -109,7 +137,7 @@ export default {
         const hasError = this.validate();
         if (hasError) {
           this.$toasted.error(hasError, {
-            duration: 2000
+            duration: 2000,
           });
           return;
         }
@@ -121,14 +149,14 @@ export default {
         const region = result.response.region;
         const cInfo = result.response.user.customerinfo;
         const {
-          response: { "active-plans": activePlans }
+          response: { "active-plans": activePlans },
         } = result;
         this.activePlans = result.response.activePlans;
         const info = activePlans.map(function(plan) {
           return {
             channelId: plan.plan_CODE,
             bouquetname: plan.plan_DESC,
-            price: plan.totalPlanPrice
+            price: plan.totalPlanPrice,
           };
         });
         const channelObj = activePlans.map(function(plan) {
@@ -139,10 +167,10 @@ export default {
         var merged = [].concat.apply([], info);
         var channerOBJS = [].concat.apply([], channelObj);
         console.log(merged);
-        let channerIDS = channerOBJS.map(a => a.channelId);
+        let channerIDS = channerOBJS.map((a) => a.channelId);
         // let result2 = merged.map(a => a.price)
         let bkt_prices = result.response["active-plans"].map(
-          plan => plan.totalPlanPrice
+          (plan) => plan.totalPlanPrice
         );
         let totalPrice = bkt_prices.reduce((a, price) => a + price, 0); // Total bucket price
         let resActivePlans = result.response["active-plans"]; //.map(plan => plan.totalPlanPrice)
@@ -153,7 +181,7 @@ export default {
           quality: result.response.QUALITY,
           customerType: "DP",
           isLogin: false,
-          totalPrice: totalPrice
+          totalPrice: totalPrice,
         };
         localStorage.setItem("in:user", JSON.stringify(user));
         payload[form] = true;
@@ -166,15 +194,15 @@ export default {
             cInfo,
             region,
             totalPrice,
-            resActivePlans
-          }
+            resActivePlans,
+          },
         });
       } catch (err) {
         const message = extractError(err);
         this.$showError(message);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style>
@@ -216,5 +244,8 @@ export default {
 }
 div {
   font-family: "Nunito", sans-serif !important ;
+}
+.login-des ul li {
+  list-style-type: circle;
 }
 </style>
