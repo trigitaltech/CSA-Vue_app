@@ -1,6 +1,9 @@
 <template>
   <v-container fluid>
     <v-row class="mx-md-12">
+      <v-overlay :value="overlay">
+        <v-progress-circular indeterminate size="64"></v-progress-circular>
+      </v-overlay>
       <v-col class="col-md-12 col-lg-12 col-12">
         <v-card flat>
           <v-row class="px-2" style="color: rgb(73, 184, 237);">
@@ -10,34 +13,23 @@
               </h2>
             </v-col>
             <v-col class="col-md-4 col-lg-4 col-12">
-              <div class="header-detail">
+              <!-- <div class="header-detail">
                 <div class="d-flex w-100 justify-space-between">
-                <span class="" >
-                 Channels Selected : 334
-                </span>
-                <span class="">
-                  Bouquets : 44
-                </span>
-                <span >
-                  View Cart : 353
-                </span>
+                  <span class>Channels Selected : 334</span>
+                  <span class>Bouquets : 44</span>
+                  <span>View Cart : 353</span>
                 </div>
                 <div class="d-flex w-100 justify-space-between">
-                <span class="" >
-                  Alacarte : 32
-                </span> 
-                <span class="">
-                  Total Price : 1034
-                </span>
+                  <span class>Alacarte : 32</span>
+                  <span class>Total Price : 1034</span>
                 </div>
-              </div>
+              </div>-->
             </v-col>
             <v-col class="col-md-2 col-lg-2 col-12 d-flex align-center">
-              <v-btn
+              <!-- <v-btn
                 class="ml-md-auto ml-lg-auto mx-sml-auto d-block main-button"
                 color="primary white--text text--lighten-1"
-                >Optimize
-              </v-btn>
+              >Optimize</v-btn>-->
             </v-col>
           </v-row>
         </v-card>
@@ -45,10 +37,8 @@
       <v-col class="col-md-12 col-lg-12 col-12">
         <v-row>
           <v-col class="col-md-6 col-lg-6 col-12">
-            <v-card  color="primary white--text text--lighten-1">
-              <v-card-title class="loginmain2 justify-center"
-                >Current Active Packs</v-card-title
-              >
+            <v-card color="primary white--text text--lighten-1">
+              <v-card-title class="loginmain2 justify-center">Current Active Packs</v-card-title>
               <v-data-table
                 hide-default-header
                 :headers="columns2"
@@ -58,38 +48,30 @@
                 hide-default-footer
                 class="my-table"
                 @page-count="pageCount = $event"
-              >
-              </v-data-table>
+              ></v-data-table>
               <hr />
               <v-simple-table>
                 <template v-slot:default>
                   <thead>
                     <tr>
-                      <th class="text-left" style="color:black;">
-                        Content Amount
-                      </th>
-                      <th class="text-left" style="color:black;">
-                        {{ params.totalPrice }} /-
-                      </th>
+                      <th class="text-left" style="color:black;">Content Amount</th>
+                      <th class="text-left" style="color:black;">{{ params.totalPrice }} /-</th>
                     </tr>
                     <tr>
-                      <th class="text-left" style="color:black;">
-                        Total Tax (18% GST)
-                      </th>
-                      <th class="text-left" style="color:black;">
-                        {{ ((params.totalPrice / 100) * 18).toFixed(2) }} /-
-                      </th>
+                      <th class="text-left" style="color:black;">Total Tax (18% GST)</th>
+                      <th
+                        class="text-left"
+                        style="color:black;"
+                      >{{ ((params.totalPrice / 100) * 18).toFixed(2) }} /-</th>
                     </tr>
                     <tr>
-                      <th class="text-left" style="color:black;">
-                        Total Bill Amount
-                      </th>
+                      <th class="text-left" style="color:black;">Total Bill Amount</th>
                       <th class="text-left" style="color:black;">
                         {{
-                          totalWithGST(
-                            params.totalPrice,
-                            ((params.totalPrice / 100) * 18).toFixed(2)
-                          )
+                        totalWithGST(
+                        params.totalPrice,
+                        ((params.totalPrice / 100) * 18).toFixed(2)
+                        )
                         }}
                         /-
                       </th>
@@ -101,14 +83,14 @@
             </v-card>
           </v-col>
           <v-col class="col-md-6 col-lg-6 col-12">
-            <h2 class="recommended-Packs text-color-080851  ">
+            <h2 class="recommended-Packs text-color-080851">
               Recommended Packs
-              <small class="recommended-Pack-Subtitle"
-                >(Optimised pack based on the user’s Current Active Packs )
-              </small>
+              <small
+                class="recommended-Pack-Subtitle"
+              >(Optimised pack based on the user’s Current Active Packs )</small>
             </h2>
 
-            <v-card class=" mt-3">
+            <v-card class="mt-3">
               <v-card-text>
                 <v-simple-table>
                   <template v-slot:default>
@@ -138,37 +120,27 @@
                 <v-simple-table>
                   <template v-slot:default>
                     <thead>
-                      <tr
-                        v-for="(items, channelInde) in optimizeResult"
-                        :key="channelInde"
-                      ></tr>
+                      <tr v-for="(items, channelInde) in optimizeResult" :key="channelInde"></tr>
                       <tr>
-                        <th class="text-left" style="color:black;">
-                          Content Amount
-                        </th>
-                        <th class="text-left" style="color:black;">
-                          {{ decimal(totalPrice) }} /-
-                        </th>
+                        <th class="text-left" style="color:black;">Content Amount</th>
+                        <th class="text-left" style="color:black;">{{ decimal(totalPrice) }} /-</th>
                       </tr>
 
                       <tr>
-                        <th class="text-left" style="color:black;">
-                          Total Tax (18% GST)
-                        </th>
-                        <th class="text-left" style="color:black;">
-                          {{ ((totalPrice / 100) * 18).toFixed(2) }} /-
-                        </th>
+                        <th class="text-left" style="color:black;">Total Tax (18% GST)</th>
+                        <th
+                          class="text-left"
+                          style="color:black;"
+                        >{{ ((totalPrice / 100) * 18).toFixed(2) }} /-</th>
                       </tr>
                       <tr>
-                        <th class="text-left" style="color:black;">
-                          Total Bill Amount
-                        </th>
+                        <th class="text-left" style="color:black;">Total Bill Amount</th>
                         <th class="text-left" style="color:black;">
                           {{
-                            totalWithGST(
-                              decimal(totalPrice),
-                              ((totalPrice / 100) * 18).toFixed(2)
-                            )
+                          totalWithGST(
+                          parseFloat(decimal(totalPrice)),
+                          ((totalPrice / 100) * 18).toFixed(2)
+                          )
                           }}
                           /-
                         </th>
@@ -178,25 +150,23 @@
                   </template>
                 </v-simple-table>
               </v-card-text>
-              <div class="d-md-flex d-lg-flex justify-space-between">
-                <v-card-actions>
-                  <v-btn
-                    class="main-button w-sm-100  d-block"
-                    color="primary white--text text--lighten-1"
-                    @click="addMoreChannels"
-                    >Click Here to Add More Channels</v-btn
-                  >
-                </v-card-actions>
-                <v-card-actions>
-                  <v-btn
-                    class="main-button w-sm-100 d-block "
-                    color="primary white--text text--lighten-1"
-                    @click="Checkout"
-                    >Checkout</v-btn
-                  >
-                </v-card-actions>
-              </div>
             </v-card>
+            <div class="d-md-flex d-lg-flex justify-space-between">
+              <v-card-actions>
+                <v-btn
+                  class="main-button w-sm-100 d-block"
+                  color="primary white--text text--lighten-1"
+                  @click="addMoreChannels"
+                >Click Here to Add More Channels</v-btn>
+              </v-card-actions>
+              <v-card-actions>
+                <v-btn
+                  class="main-button w-sm-100 d-block"
+                  color="primary white--text text--lighten-1"
+                  @click="Checkout"
+                >Checkout</v-btn>
+              </v-card-actions>
+            </div>
           </v-col>
         </v-row>
       </v-col>
@@ -210,6 +180,7 @@ import { getOptimizeAlgoritm } from "../services/channel";
 export default {
   data() {
     return {
+      overlay: true,
       page: 1,
       pageCount: 1,
       itemsPerPage: 5,
@@ -217,7 +188,7 @@ export default {
       totalPrice: 0,
       columns2: [
         { text: "BouquetName", value: "bouquetname" },
-        { text: "price", value: "price" },
+        { text: "price", value: "price" }
       ],
       verify1: this.$route.params.merged,
       params: this.$route.params,
@@ -228,25 +199,25 @@ export default {
         {
           desc: "Content Amount",
           qty: null,
-          price: "₹ 130",
+          price: "₹ 130"
         },
         {
           desc: "Content Amount",
           qty: null,
-          price: "₹ 130",
+          price: "₹ 130"
         },
         {
           desc: "GST(18%)",
           qty: null,
-          price: 0,
+          price: 0
         },
         {
           desc: "Total (Monthly)",
           qty: null,
-          price: 0,
-        },
+          price: 0
+        }
       ],
-      payChannel: [],
+      payChannel: []
     };
   },
   methods: {
@@ -272,14 +243,19 @@ export default {
       const payload = {
         channelIds: userData.channelIds,
         quality: userData.quality,
-        region: userData.region,
+        region: userData.region
       };
       const result = await getOptimizeAlgoritm(payload);
-      console.log(result.message);
-      const data = result.message;
-      this.optimizeResult = data;
-      this.totalPrice = data.price;
-      console.log(this.totalPrice);
+      if (result.statusCode === 200) {
+        console.log(result.message);
+        const data = result.message;
+        this.optimizeResult = data;
+        this.totalPrice = data.price;
+        this.overlay = false;
+      } else {
+        this.overlay = false;
+      }
+
       /*eslint no-console: "off"*/
       // var bouquetId = result.response.data.bouquets.bouquetId
       // if (data) {
@@ -299,7 +275,7 @@ export default {
       //   this.optimizeResultCost[6].price = ((this.optimizeResultCost[5].price + this.optimizeResultCost[4].price) * 18) / 100;
       //   this.optimizeResultCost[7].price = this.optimizeResultCost[6].price + this.optimizeResultCost[5].price +  + this.optimizeResultCost[4 ].price;
       // }
-    },
+    }
   },
   // computed: {
   //   getCart() {
@@ -308,7 +284,7 @@ export default {
   async mounted() {
     this.optimizeAlgorithm();
     console.log("3333333333");
-  },
+  }
 };
 </script>
 <style>
@@ -329,7 +305,14 @@ export default {
     rgb(241, 241, 241) 27%,
     rgb(211, 211, 211) 100%
   ); */
-  background: linear-gradient( 13deg, rgba(73, 184, 237, 1) 0%, rgba(133, 50, 142, 1) 57%, rgba(147, 58, 148, 1) 93%, rgba(150, 60, 149, 1) 96%, rgba(153, 62, 150, 1) 100% );
+  background: linear-gradient(
+    13deg,
+    rgba(73, 184, 237, 1) 0%,
+    rgba(133, 50, 142, 1) 57%,
+    rgba(147, 58, 148, 1) 93%,
+    rgba(150, 60, 149, 1) 96%,
+    rgba(153, 62, 150, 1) 100%
+  );
 }
 </style>
 
@@ -346,11 +329,14 @@ export default {
 .text-color-080851 {
   color: #080851;
 }
-.header-detail{
+.header-detail {
   padding: 2px 10px;
   text-transform: capitalize;
   border: 1px solid #aba9a9;
   color: #676666;
   border-radius: 4px;
+}
+.theme--light.v-data-table thead tr:last-child th {
+  border-bottom: none !important;
 }
 </style>
