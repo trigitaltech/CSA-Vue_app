@@ -1,8 +1,11 @@
 <template>
   <v-container fluid>
     <v-row class="mx-md-12">
+      <v-overlay :value="overlay">
+        <v-progress-circular indeterminate size="64"></v-progress-circular>
+      </v-overlay>
       <v-col class="col-md-12 col-lg-12 col-12">
-        <v-card flat class="">
+        <v-card flat class>
           <v-row class="px-2" style="color: rgb(73, 184, 237);">
             <v-col class="col-md-6 col-lg-6 col-12">
               <h2></h2>
@@ -10,26 +13,14 @@
             <v-col class="col-md-6 col-lg-6 col-12">
               <div class="header-detail">
                 <div class="d-flex w-100 justify-space-between">
-                  <span class="">
-                    Channels Selected
-                  </span>
-                  <span class="">
-                    Indigital packs: {{ userSelection.inDigital.length }}
-                  </span>
-                  <span class="">
-                    Alacarte: {{ userSelection.alaCard.length }}
-                  </span>
-                  <span>
-                    View Cart
-                  </span>
+                  <span class>Channels Selected</span>
+                  <span class>Indigital packs: {{ userSelection.inDigital.length }}</span>
+                  <span class>Alacarte: {{ userSelection.alaCard.length }}</span>
+                  <span>View Cart</span>
                 </div>
                 <div class="d-flex w-100 justify-space-between">
-                  <span class="">
-                    Broadcaster Packs: {{ userSelection.broadCast.length }}
-                  </span>
-                  <span class="">
-                    Total Price : 00
-                  </span>
+                  <span class>Broadcaster Packs: {{ userSelection.broadCast.length }}</span>
+                  <span class>Total Price : 00</span>
                 </div>
               </div>
             </v-col>
@@ -60,7 +51,7 @@
           </v-card>
         </v-toolbar-items>
       </v-toolbar>
-    </template> -->
+      </template>-->
       <v-col class="col-md-12 col-lg-12 col-12">
         <v-row>
           <v-col class="col-md-8 col-lg-8 col-12">
@@ -90,9 +81,7 @@
                             </div>
                           </v-card-title>
                           <v-card-body>
-                            <div class="text-center">
-                              &#x20b9; {{ item.price }}
-                            </div>
+                            <div class="text-center">&#x20b9; {{ item.price }}</div>
                           </v-card-body>
                           <v-card-actions>
                             <v-row align="center" justify="center" class="mb-2">
@@ -101,17 +90,13 @@
                                 small
                                 @click="addCart(item, 'inDigital')"
                                 v-if="!item.isCart"
-                              >
-                                Select
-                              </v-btn>
+                              >Select</v-btn>
                               <v-btn
                                 color="error"
                                 small
                                 @click="removeCart(item, 'inDigital')"
                                 v-else
-                              >
-                                Remove
-                              </v-btn>
+                              >Remove</v-btn>
                             </v-row>
                           </v-card-actions>
                         </v-card>
@@ -145,9 +130,7 @@
                             </div>
                           </v-card-title>
                           <v-card-body>
-                            <div class="text-center">
-                              &#x20b9; {{ item.price }}
-                            </div>
+                            <div class="text-center">&#x20b9; {{ item.price }}</div>
                           </v-card-body>
                           <v-card-actions>
                             <v-row align="center" justify="center" class="mb-2">
@@ -156,17 +139,13 @@
                                 small
                                 @click="addCart(item, 'broadCast')"
                                 v-if="!item.isCart"
-                              >
-                                Select
-                              </v-btn>
+                              >Select</v-btn>
                               <v-btn
                                 color="error"
                                 small
                                 @click="removeCart(item, 'broadCast')"
                                 v-else
-                              >
-                                Remove
-                              </v-btn>
+                              >Remove</v-btn>
                             </v-row>
                           </v-card-actions>
                         </v-card>
@@ -210,7 +189,7 @@
                           </v-btn>
                         </v-row>
                       </v-card-actions>
-                    </v-card> -->
+                        </v-card>-->
                       </v-col>
                     </v-row>
                   </v-card-text>
@@ -223,12 +202,7 @@
                     <v-card-title>
                       <v-row>
                         <v-col sm="12" md="4">
-                          <v-text-field
-                            v-model="search"
-                            label="Search"
-                            single-line
-                            hide-details
-                          ></v-text-field>
+                          <v-text-field v-model="search" label="Search" single-line hide-details></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="4">
                           <v-select
@@ -257,9 +231,7 @@
                               <span
                                 v-if="index === 1"
                                 class="grey--text caption"
-                              >
-                                (+{{ genreValue.length - 1 }})
-                              </span>
+                              >(+{{ genreValue.length - 1 }})</span>
                             </template>
                           </v-select>
                         </v-col>
@@ -280,9 +252,7 @@
                               <span
                                 v-if="index === 1"
                                 class="grey--text caption"
-                              >
-                                (+{{ broadCastValue.length - 1 }})
-                              </span>
+                              >(+{{ broadCastValue.length - 1 }})</span>
                             </template>
                           </v-select>
                         </v-col>
@@ -303,9 +273,7 @@
                               <span
                                 v-if="index === 1"
                                 class="grey--text caption"
-                              >
-                                (+{{ languageValue.length - 1 }})
-                              </span>
+                              >(+{{ languageValue.length - 1 }})</span>
                             </template>
                           </v-select>
                         </v-col>
@@ -377,45 +345,35 @@
                                 <div
                                   align="center"
                                   class="box-font-title font-weight-medium text-truncate text-wrap-dots"
-                                >
-                                  {{ item.name }}
-                                </div>
+                                >{{ item.name }}</div>
                                 <v-row>
                                   <div class="w-100 text-center">
-                                    <span class="overline text-wrap-dots">
-                                      {{ item.genre.name | get5Char }} </span
-                                    >|
-                                    <span class="overline text-wrap-dots">
-                                      {{ item.language.name | get3Char }}
-                                    </span>
+                                    <span
+                                      class="overline text-wrap-dots"
+                                    >{{ item.genre.name | get5Char }}</span>|
+                                    <span
+                                      class="overline text-wrap-dots"
+                                    >{{ item.language.name | get3Char }}</span>
                                   </div>
-                                  <div class="w-100 text-center">
-                                    &#x20b9; {{ item.price }}
-                                  </div>
+                                  <div class="w-100 text-center">&#x20b9; {{ item.price }}</div>
+                                </v-row>
+                                <v-row align="center" justify="center" class="mb-2">
+                                  <v-btn
+                                    color="primary"
+                                    small
+                                    @click="addCart(item, 'alaCard')"
+                                    v-if="!item.isCart"
+                                  >Select</v-btn>
+                                  <v-btn
+                                    color="error"
+                                    small
+                                    @click="removeCart(item, 'alaCard')"
+                                    v-else
+                                  >Remove</v-btn>
                                 </v-row>
                               </v-card-text>
                             </div>
                           </v-row>
-                          <v-card-actions>
-                            <v-row align="center" justify="center" class="mb-2">
-                              <v-btn
-                                color="primary"
-                                small
-                                @click="addCart(item, 'alaCard')"
-                                v-if="!item.isCart"
-                              >
-                                Select
-                              </v-btn>
-                              <v-btn
-                                color="error"
-                                small
-                                @click="removeCart(item, 'alaCard')"
-                                v-else
-                              >
-                                Remove
-                              </v-btn>
-                            </v-row>
-                          </v-card-actions>
                         </v-card>
                       </v-col>
                     </v-row>
@@ -428,41 +386,30 @@
             <v-card flat>
               <v-card-title
                 class="User-Selection-labels text-color-080851 font-weight-bold"
-                >User Selection</v-card-title
-              >
-              <v-card-subtitle
-                class="User-Selection-labels"
-                style="font-size:12px;"
-              >
+              >User Selection</v-card-title>
+              <v-card-subtitle class="User-Selection-labels" style="font-size:12px;">
                 <div class="recommended-Pack-Subtitle">CHANNELS SELECTED</div>
-                <div class="recommended-Pack-Subtitle">
-                  INDIGITAL PACKS : {{ userSelection.inDigital.length }}
-                </div>
-                <div class="recommended-Pack-Subtitle">
-                  BROADCASTER PACKS : {{ userSelection.broadCast.length }}
-                </div>
-                <div class="recommended-Pack-Subtitle">
-                  ALACARTE : {{ userSelection.alaCard.length }}
-                </div>
+                <div
+                  class="recommended-Pack-Subtitle"
+                >INDIGITAL PACKS : {{ userSelection.inDigital.length }}</div>
+                <div
+                  class="recommended-Pack-Subtitle"
+                >BROADCASTER PACKS : {{ userSelection.broadCast.length }}</div>
+                <div class="recommended-Pack-Subtitle">ALACARTE : {{ userSelection.alaCard.length }}</div>
               </v-card-subtitle>
               <hr class="ml-2 mr-2" />
               <v-card-text>
                 <v-expansion-panels>
                   <v-expansion-panel class="my-2">
-                    <v-expansion-panel-header
-                      >INDIGITAL PACKS ({{
-                        userSelection.inDigital.length
-                      }})</v-expansion-panel-header
-                    >
+                    <v-expansion-panel-header>
+                      INDIGITAL PACKS ({{
+                      userSelection.inDigital.length
+                      }})
+                    </v-expansion-panel-header>
                     <v-expansion-panel-content>
-                      <v-row
-                        v-for="(item, idx) in userSelection.inDigital"
-                        :key="idx"
-                      >
+                      <v-row v-for="(item, idx) in userSelection.inDigital" :key="idx">
                         <v-col md="7">
-                          <div
-                            style="font-size:16px; color:rgba(133, 50, 142, 1);"
-                          >
+                          <div style="font-size:16px; color:rgba(133, 50, 142, 1);">
                             <b>{{ item.name }}</b>
                           </div>
                         </v-col>
@@ -470,13 +417,7 @@
                           <b>₹ {{ item.price }}</b>
                         </v-col>
                         <v-col>
-                          <v-btn
-                            color="error"
-                            small
-                            @click="removeCart(item, 'inDigital')"
-                          >
-                            X
-                          </v-btn>
+                          <v-btn color="error" small @click="removeCart(item, 'inDigital')">X</v-btn>
                         </v-col>
                       </v-row>
                     </v-expansion-panel-content>
@@ -485,18 +426,11 @@
 
                 <v-expansion-panels>
                   <v-expansion-panel class="my-2">
-                    <v-expansion-panel-header>
-                      BROADCASTER PACKS ({{ userSelection.broadCast.length }})
-                    </v-expansion-panel-header>
+                    <v-expansion-panel-header>BROADCASTER PACKS ({{ userSelection.broadCast.length }})</v-expansion-panel-header>
                     <v-expansion-panel-content>
-                      <v-row
-                        v-for="(item, idx) in userSelection.broadCast"
-                        :key="idx"
-                      >
+                      <v-row v-for="(item, idx) in userSelection.broadCast" :key="idx">
                         <v-col md="7">
-                          <div
-                            style="font-size:16px; color:rgba(133, 50, 142, 1);"
-                          >
+                          <div style="font-size:16px; color:rgba(133, 50, 142, 1);">
                             <b>{{ item.name }}</b>
                           </div>
                         </v-col>
@@ -504,13 +438,7 @@
                           <b>₹ {{ item.price }}</b>
                         </v-col>
                         <v-col>
-                          <v-btn
-                            color="error"
-                            small
-                            @click="removeCart(item, 'broadCast')"
-                          >
-                            X
-                          </v-btn>
+                          <v-btn color="error" small @click="removeCart(item, 'broadCast')">X</v-btn>
                         </v-col>
                       </v-row>
                     </v-expansion-panel-content>
@@ -519,18 +447,11 @@
 
                 <v-expansion-panels>
                   <v-expansion-panel class="my-2">
-                    <v-expansion-panel-header>
-                      A-LA-CARTE ({{ userSelection.alaCard.length }})
-                    </v-expansion-panel-header>
+                    <v-expansion-panel-header>A-LA-CARTE ({{ userSelection.alaCard.length }})</v-expansion-panel-header>
                     <v-expansion-panel-content>
-                      <v-row
-                        v-for="(item, idx) in userSelection.alaCard"
-                        :key="idx"
-                      >
+                      <v-row v-for="(item, idx) in userSelection.alaCard" :key="idx">
                         <v-col md="7">
-                          <div
-                            style="font-size:16px; color:rgba(133, 50, 142, 1);"
-                          >
+                          <div style="font-size:16px; color:rgba(133, 50, 142, 1);">
                             <b>{{ item.name }}</b>
                           </div>
                         </v-col>
@@ -538,13 +459,7 @@
                           <b>₹ {{ item.price }}</b>
                         </v-col>
                         <v-col>
-                          <v-btn
-                            color="error"
-                            small
-                            @click="removeCart(item, 'alaCard')"
-                          >
-                            X
-                          </v-btn>
+                          <v-btn color="error" small @click="removeCart(item, 'alaCard')">X</v-btn>
                         </v-col>
                       </v-row>
                     </v-expansion-panel-content>
@@ -553,11 +468,10 @@
               </v-card-text>
               <v-col class="d-md-flex d-lg-flex justify-end">
                 <v-btn
-                  class="w-sm-100  d-block main-button"
+                  class="w-sm-100 d-block main-button"
                   color="primary white--text text--lighten-1"
                   @click="goToOptimize"
-                  >Optimize
-                </v-btn>
+                >Optimize</v-btn>
               </v-col>
             </v-card>
           </v-col>
@@ -574,12 +488,13 @@ import {
   getBroadCasterList,
   getLanguagelsList,
   getChannelListByRegion,
-  getPacks,
+  getPacks
 } from "../services/channel";
 export default {
   name: "UserList",
   data() {
     return {
+      overlay: true,
       previewCard: [],
       itemsPerPage: 20,
       itemsPerPageOptions: [20, 40, 60, 80, 100],
@@ -590,28 +505,28 @@ export default {
       headers: [
         {
           text: "Channel",
-          value: "channel",
+          value: "channel"
         },
         {
           text: "Name",
-          value: "name",
+          value: "name"
         },
         {
           text: "Description",
-          value: "description",
+          value: "description"
         },
         {
           text: "Price",
-          value: "price",
+          value: "price"
         },
         {
           text: "Broadcaster Name",
-          value: "broadcasterName",
+          value: "broadcasterName"
         },
         {
           text: "Quality",
-          value: "quality",
-        },
+          value: "quality"
+        }
       ],
       search: "",
       genreList: [],
@@ -620,11 +535,11 @@ export default {
       priceList: [
         {
           id: [1, 2, 3, 4, 5],
-          name: "Below ₹ 5",
+          name: "Below ₹ 5"
         },
         {
           id: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-          name: "Below ₹ 10",
+          name: "Below ₹ 10"
         },
         {
           id: [
@@ -647,14 +562,14 @@ export default {
             17,
             18,
             19,
-            20,
+            20
           ],
-          name: "Below ₹ 20",
+          name: "Below ₹ 20"
         },
         {
           id: "ALL",
-          name: "All Channels",
-        },
+          name: "All Channels"
+        }
       ],
       priceValue: "ALL",
       genreValue: [],
@@ -666,27 +581,27 @@ export default {
       sortItem: [
         {
           id: "name",
-          text: "Name",
+          text: "Name"
         },
         {
           id: "broadcasterName",
-          text: "Broadcaster Name",
+          text: "Broadcaster Name"
         },
         {
           id: "genreName",
-          text: "Genre Name",
+          text: "Genre Name"
         },
         {
           id: "quality",
-          text: "Quality",
+          text: "Quality"
         },
         {
           id: "price",
-          text: "Price",
-        },
+          text: "Price"
+        }
       ],
       sortBy: "price",
-      sortDesc: false,
+      sortDesc: false
     };
   },
   computed: {
@@ -700,7 +615,7 @@ export default {
       const broadcastSet = new Set(broadcarst);
       const priceChannelSet = new Set(price);
       const languageSet = new Set(language);
-      const response = result.filter((post) => {
+      const response = result.filter(post => {
         const validGenre = gen.length == 0 ? true : genreSet.has(post.genre.id);
         const validBroadcast =
           broadcarst.length == 0 ? true : broadcastSet.has(post.broadcaster.id);
@@ -720,8 +635,8 @@ export default {
       },
       set: function(newal) {
         this.setCart(newal);
-      },
-    },
+      }
+    }
   },
   methods: {
     ...mapActions("channel", ["setCart", "setChannel"]),
@@ -733,20 +648,26 @@ export default {
       this.channelsList = result;
     },
     async getPacks1() {
+      this.overlay = true;
       var userData = JSON.parse(localStorage.getItem("in:user"));
       const payload = {
         customerType: userData.customerType,
         quality: userData.quality,
         region: userData.region,
-        category: "Dpo",
+        category: "Dpo"
       };
       const result = await getPacks(payload);
       const data = result.message;
-      let newData = data.map((e) => {
-        e.isCart = false;
-        return e;
-      });
-      this.indigitalpacks = newData;
+      if (data) {
+        let newData = data.map(e => {
+          e.isCart = false;
+          return e;
+        });
+        this.indigitalpacks = newData;
+        this.overlay = false;
+      } else {
+        this.overlay = false;
+      }
     },
     async getPacks() {
       var userData = JSON.parse(localStorage.getItem("in:user"));
@@ -754,7 +675,7 @@ export default {
         customerType: userData.customerType,
         quality: userData.quality,
         region: userData.region,
-        category: "broadcaster",
+        category: "broadcaster"
       };
       const result = await getPacks(payload);
       const data = result.message;
@@ -766,12 +687,12 @@ export default {
       const payload = {
         customerType: userData.customerType,
         quality: userData.quality,
-        region: userData.region,
+        region: userData.region
       };
       const result = await getChannelListByRegion(payload);
       const data = result.message;
       if (data) {
-        const newData = data.map((e) => {
+        const newData = data.map(e => {
           e.isCart = false;
           return e;
         });
@@ -779,10 +700,10 @@ export default {
       }
     },
     goToOptimize() {
-      const inDigi_id_Ayyray = this.userSelection.inDigital.map((bucket) => {
+      const inDigi_id_Ayyray = this.userSelection.inDigital.map(bucket => {
         return _.map(bucket.channels, "id");
       });
-      const b_Channles_arrays = this.userSelection.broadCast.map((bucket) => {
+      const b_Channles_arrays = this.userSelection.broadCast.map(bucket => {
         return _.map(bucket.channels, "id");
       });
       this.storeSelectedBouquetsInLocasStorage();
@@ -794,29 +715,29 @@ export default {
       );
       this.$router.push({
         name: "optimization",
-        params: { uniqSelectedChannels },
+        params: { uniqSelectedChannels }
       });
     },
     storeSelectedBouquetsInLocasStorage() {
       console.log(this.userSelection);
-      let smllInDigis = this.userSelection.inDigital.map((bucket) => {
+      let smllInDigis = this.userSelection.inDigital.map(bucket => {
         return {
           id: bucket.id,
           name: bucket.name,
           description: bucket.description,
           price: bucket.price,
           channelsCount: bucket.channels.length,
-          type: "inDigital",
+          type: "inDigital"
         };
       });
-      let selectedBrodCasts = this.userSelection.broadCast.map((bucket) => {
+      let selectedBrodCasts = this.userSelection.broadCast.map(bucket => {
         return {
           id: bucket.id,
           name: bucket.name,
           description: bucket.description,
           price: bucket.price,
           channelsCount: bucket.channels.length,
-          type: "broadCast",
+          type: "broadCast"
         };
       });
       let SelectedBoucquets = _.uniq(
@@ -866,20 +787,18 @@ export default {
     removeCart(payload, removingType = "alaCard") {
       payload.isCart = false;
       if (removingType == "alaCard") {
-        let ala = this.userSelection.alaCard.filter((x) => x.id != payload.id);
+        let ala = this.userSelection.alaCard.filter(x => x.id != payload.id);
         this.userSelection.alaCard = ala;
       } else if (removingType == "broadCast") {
-        let brd = this.userSelection.broadCast.filter(
-          (x) => x.id != payload.id
-        );
+        let brd = this.userSelection.broadCast.filter(x => x.id != payload.id);
         this.userSelection.broadCast = brd;
       } else if (removingType == "inDigital") {
         let inDigi = this.userSelection.inDigital.filter(
-          (x) => x.id != payload.id
+          x => x.id != payload.id
         );
         this.userSelection.inDigital = inDigi;
       }
-    },
+    }
   },
   mounted() {
     this.getPacks();
@@ -901,8 +820,8 @@ export default {
     },
     get5Char: function(value) {
       return value.substring(0, 5);
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>
@@ -927,10 +846,10 @@ export default {
 .w-100 {
   width: 100%;
 }
-.a-lal-cart-box .v-card__text{
+.a-lal-cart-box .v-card__text {
   padding: 2px !important;
 }
-.img-w-100{
+.img-w-100 {
   width: 100%;
   height: 100px;
 }
