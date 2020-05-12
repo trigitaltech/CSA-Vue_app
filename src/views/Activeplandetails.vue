@@ -4,10 +4,10 @@
       <v-overlay :value="overlay">
         <v-progress-circular indeterminate size="64"></v-progress-circular>
       </v-overlay>
-      <v-col class="col-md-12 col-lg-12 col-12">
-        <v-card flat>
+      <v-col class="col-md-12 col-lg-12 col-12" >
+        <v-card flat >
           <v-row class="px-2" style="color: rgb(73, 184, 237);">
-            <v-col class="col-md-6 col-lg-6 col-12">
+            <v-col class="col-md-6 col-lg-6 col-12" >
               <h2>
                 <b>Welcome {{ name }} !</b>
               </h2>
@@ -34,13 +34,12 @@
           </v-row>
         </v-card>
       </v-col>
-      <v-col class="col-md-12 col-lg-12 col-12">
+      <v-col class="col-md-12 col-lg-12 col-12" >
         <v-row>
-          <v-col class="col-md-6 col-lg-6 col-12">
+          <v-col class="col-md-6 col-lg-6 col-12" style="margin-top:10px;">
             <v-card color="primary white--text text--lighten-1">
               <v-card-title class="loginmain2 justify-center">Current Active Packs</v-card-title>
               <v-data-table
-                hide-default-header
                 :headers="columns2"
                 :items="verify1"
                 :page.sync="page"
@@ -83,23 +82,32 @@
             </v-card>
           </v-col>
           <v-col class="col-md-6 col-lg-6 col-12">
-            <h2 class="recommended-Packs text-color-080851">
+            <v-card class="mt-3" >
+               <v-card-title class="loginmain2 justify-center" style="font-size:18px">
               Recommended Packs
-              <small
-                class="recommended-Pack-Subtitle"
-              >(Optimised pack based on the user’s Current Active Packs )</small>
-            </h2>
-
-            <v-card class="mt-3">
+              
+              (Optimised pack based on the user’s Current Active Packs)
+            </v-card-title>
               <v-card-text>
-                <v-simple-table>
+                 
+              <v-data-table
+                :headers="columns3"
+                :items="this.optimizeResult"
+                :page.sync="page"
+                :items-per-page="itemsPerPage"
+                hide-default-footer
+                class="my-table"
+                @page-count="pageCount = $event"
+              ></v-data-table>
+              <hr />
+                <!-- <v-simple-table>
                   <template v-slot:default>
                     <div v-if="optimizeResult && optimizeResult.bouquets">
                       <thead>
-                        <tr>
-                          <th class="text-left">Channel Name</th>
-                          <th class="text-left">Bouquet Name</th>
-                          <th class="text-left">Total Price</th>
+                        <tr class="recommended-Packs text-color-080851">
+                          <th class="text-left">Bouquet Channel Name</th>
+                          <- <th class="text-left">Bouquet Name</th> -->
+                          <!-- <th>Total Price</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -109,13 +117,13 @@
                           :key="channelIndex"
                         >
                           <td>{{ items.bouquetName }}</td>
-                          <td>{{ items.bouquetDescription }}</td>
-                          <td>{{ items.bouquetPrice }}/Month</td>
+                          <- <td>{{ items.bouquetDescription }}</td> -->
+                          <!-- <td>{{ items.bouquetPrice }}/Month</td>
                         </tr>
                       </tbody>
                     </div>
                   </template>
-                </v-simple-table>
+                </v-simple-table> --> 
                 <hr />
                 <v-simple-table>
                   <template v-slot:default>
@@ -190,11 +198,16 @@ export default {
         { text: "BouquetName", value: "bouquetname" },
         { text: "price", value: "price" }
       ],
+       columns3: [
+        { text: "BouquetName", value: "bouquetDescription" },
+        { text: "price", value: "bouquetPrice"}
+      ],
+      
       verify1: this.$route.params.merged,
       params: this.$route.params,
       name: this.$route.params.firstname,
       accountno: this.$route.params.customerno,
-      optimizeResult: null,
+      // optimizeResult:this.optimizeResult,
       optimizeResultCost: [
         {
           desc: "Content Amount",
@@ -249,7 +262,8 @@ export default {
       if (result.statusCode === 200) {
         console.log(result.message);
         const data = result.message;
-        this.optimizeResult = data;
+        this.optimizeResult = data.bouquets;
+        console.log(this.optimizeResult)
         this.totalPrice = data.price;
         this.overlay = false;
       } else {

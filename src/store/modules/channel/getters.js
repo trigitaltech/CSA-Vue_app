@@ -19,8 +19,8 @@ export default {
         state.cartCost[4].price = (payChannels + 0) // Price(Channel+Bouquet)
         state.cartCost[4].qty = null // (25 + cart.length); // Price(Channel+Bouquet)
         state.cartCost[5].price = 130 // Network Capacity Fees
-        state.cartCost[6].price = (((state.cartCost[5].price+state.cartCost[4].price)*18)/100);
-        state.cartCost[7].price = state.cartCost[6].price + state.cartCost[5].price + state.cartCost[4].price;
+        state.cartCost[6].price = (((state.cartCost[2].price+state.cartCost[5].price+state.cartCost[4].price)*18)/100);
+        state.cartCost[7].price = state.cartCost[2].price + state.cartCost[6].price + state.cartCost[5].price + state.cartCost[4].price;
         return state.cartCost;
     }
 }

@@ -42,7 +42,7 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col style="font-size:16px;" class="col-md-6 col-lg-6 col-12">
+      <v-col style="font-size:20px;" class="col-md-6 col-lg-6 col-12">
         <div class="mt-3 login-des">
           <ul>
             <li>
