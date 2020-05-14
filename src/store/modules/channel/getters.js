@@ -15,7 +15,7 @@ export default {
         state.cartCost[2].qty = localBoucquetsData.length // No. of bouquet 
         state.cartCost[2].price = sumBy(localBoucquetsData,"price") // total of bouquets
         state.cartCost[3].price = (0 + state.cartCost[1].price); // Total No. of unique Channels
-        state.cartCost[3].qty = (25 + cart.length).toFixed(2); // Total No. of unique Channels
+        state.cartCost[3].qty = (25 + cart.length); // Total No. of unique Channels
         state.cartCost[4].price = (payChannels + 0) // Price(Channel+Bouquet)
         state.cartCost[4].qty = null // (25 + cart.length); // Price(Channel+Bouquet)
         state.cartCost[5].price = 130 // Network Capacity Fees
