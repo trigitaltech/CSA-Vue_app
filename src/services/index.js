@@ -4,7 +4,8 @@ export function isValidResponse(resp) {
 }
 export const NTO = Axios.create({
   // baseURL: "http://csa-d.ap-south-1.elasticbeanstalk.com/v1/api/nto/"---briplcsa
-  baseURL: "http://ec2-13-232-217-251.ap-south-1.compute.amazonaws.com:8886/v1/api/nto/" 
+  // baseURL: "http://ec2-52-66-60-223.ap-south-1.compute.amazonaws.com:8886/v1/api/nto/" 
+  baseURL:"http://52.66.60.223:8886/v1/api/nto/"
 });
 export const methods = {
   DELETE: "DELETE",
